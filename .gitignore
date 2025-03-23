@@ -1,0 +1,66 @@
+### **Android Studio & Gradle Files**
+.idea/
+.gradle/
+*.iml
+/local.properties
+/.cxx/
+.externalNativeBuild/
+.cxx/
+captures/
+build/
+outputs/
+intermediates/
+generated/
+gradle-app.setting
+
+### **Compiled Files**
+*.dex
+*.class
+*.jar
+*.apk
+*.aab
+*.so
+*.o
+*.obj
+*.hprof
+
+### **Version Control & Logs**
+*.log
+*.lock
+*.DS_Store
+*.swp
+*.swo
+*.swn
+*.vscode/
+
+### **Keystore Files (Important for Security)**
+*.keystore
+*.jks
+
+### **Generated JSON & XML**
+/app/google-services.json
+/app/src/debug/res/values/google-services.xml
+/app/src/release/res/values/google-services.xml
+
+### **Dependency Caches**
+/node_modules/
+package-lock.json
+yarn.lock
+
+### **Kotlin (Even If You're Using Java)**
+/.kotlin/
+*.kotlin_metadata
+
+### **Ignore NDK & CMake Build Outputs**
+cmake-build-debug/
+.idea/cmake.xml
+.idea/modules.xml
+.idea/workspace.xml
+app/src/main/jniLibs/
+
+### **Ignore Backup & Temp Files**
+*.bak
+*.tmp
+*.orig
+*.rej
+Thumbs.db
