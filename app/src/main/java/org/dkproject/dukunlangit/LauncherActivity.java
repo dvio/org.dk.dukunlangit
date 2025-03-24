@@ -1,10 +1,13 @@
 package org.dkproject.dukunlangit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -16,13 +19,15 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class LauncherActivity extends Activity {
+    private SharedPreferences sharedPreferences;
     public static String ACTIVE_SKY_PACKAGE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Retrieve the selected package name
-        SharedPreferences sharedPreferences = getSharedPreferences("DukunLangitConfig", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("DukunLangitConfig", MODE_PRIVATE);
         ACTIVE_SKY_PACKAGE = sharedPreferences.getString("active_sky_package", "com.tgc.sky.android");
 
         if (!ACTIVE_SKY_PACKAGE.isEmpty()) {
@@ -34,21 +39,29 @@ public class LauncherActivity extends Activity {
         }
 
         // Close the activity once done
-        finish();
+        loadGame();
     }
 
     private void loadGame() {
         PackageManager pm = getPackageManager();
         try {
-            PackageInfo info;
-            info = pm.getPackageInfo(ACTIVE_SKY_PACKAGE, PackageManager.GET_SHARED_LIBRARY_FILES);
-            LangitApp.gamePkg = info.packageName;
-            LangitApp.gameRes = pm.getResourcesForApplication(info.packageName);
-            LangitApp.langitRes = getResources();
-            String gameVersion = info.versionName;
+            PackageInfo pkgInfo;
+            pkgInfo = pm.getPackageInfo(ACTIVE_SKY_PACKAGE, PackageManager.GET_SHARED_LIBRARY_FILES);
+            Context langitContext = getApplicationContext();
+            Resources gameResources = null;
+            try {
+                Context gameContext = getApplicationContext().createPackageContext(
+                        "com.game.package",
+                        Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
+                gameResources = gameContext.getResources();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+            LangitApp.init(pkgInfo.packageName, langitContext, gameResources);
+            String gameVersion = pkgInfo.versionName;
             BuildConfig.SKY_VERSION = gameVersion.substring(0, gameVersion.indexOf(' ')).trim();
-            BuildConfig.VERSION_CODE = info.versionCode;
-            String nativeLibraryDir = info.applicationInfo.nativeLibraryDir;
+            BuildConfig.VERSION_CODE = pkgInfo.versionCode;
+            String nativeLibraryDir = pkgInfo.applicationInfo.nativeLibraryDir;
 //            File modsDir = new File(getFilesDir(), "mods");
             File configDir = new File(getFilesDir(), "config");
             if (!configDir.isDirectory() && !configDir.mkdirs()) throw new IOException("Failed to create config directory");
@@ -60,10 +73,8 @@ public class LauncherActivity extends Activity {
             } else {
                 System.err.println("Failed to load library");
             }
-
-
-            System.loadLibrary("dukunlangit");
-            System.loadLibrary("Langit");
+            System.loadLibrary("DukunLangit");
+//            System.loadLibrary("Langit");
 
 //            setDeviceInfoNative(
 //                    deviceInfo.xdpi,
@@ -112,4 +123,13 @@ public class LauncherActivity extends Activity {
         // TODO: Implement actual library loading logic
         Log.d("LauncherActivity", "Libraries for " + packageName + " would be loaded here.");
     }
+
+    public static native void initEssentials(
+            int gameVersion,
+            int gameType,
+            String hostName,
+            String configDir,
+            Context context,
+            Resources resources
+    );
 }
