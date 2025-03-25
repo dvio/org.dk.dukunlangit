@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import org.dkproject.dukunlangit.R;
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 import kotlin.text.Typography;
 
 
@@ -1088,7 +1088,7 @@ public class Markup {
     private Drawable CreateAttachment(String resName) {
         Drawable drawable;
         try {
-            drawable = LangitApp.getGameResources().getDrawable(LangitApp.getGameResources().getIdentifier(resName, "drawable", LangitApp.getGamePackageName()), null);
+            drawable = LangitApplication.getGameResources().getDrawable(LangitApplication.getGameResources().getIdentifier(resName, "drawable", LangitApplication.getGamePackageName()), null);
         }catch (Exception e) {
             drawable = new ColorDrawable(Color.WHITE);
         }
@@ -1116,11 +1116,11 @@ public class Markup {
                 }
                 i3++;
             }
-            int identifier = LangitApp.getGameResources().getIdentifier(String.format("%s%02d", new Object[]{str, Integer.valueOf(i)}), "drawable", LangitApp.getGamePackageName());
+            int identifier = LangitApplication.getGameResources().getIdentifier(String.format("%s%02d", new Object[]{str, Integer.valueOf(i)}), "drawable", LangitApplication.getGamePackageName());
             if (identifier == 0) {
                 break;
             }
-            drawable = LangitApp.getGameResources().getDrawable(identifier, null);
+            drawable = LangitApplication.getGameResources().getDrawable(identifier, null);
             hashMap.put(String.valueOf(i2), drawable);
             i2++;
         }

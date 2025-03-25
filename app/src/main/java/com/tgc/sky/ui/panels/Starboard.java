@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.core.content.ContextCompat;
+
 import com.tgc.sky.BuildConfig;
 import com.tgc.sky.GameActivity;
 import android.webkit.WebView;
@@ -26,12 +26,10 @@ import android.webkit.WebResourceRequest;
 import android.net.Uri;
 
 import com.tgc.sky.SystemUI_android;
-import com.tgc.sky.ui.panels.CodeScanner;
 import com.tgc.sky.ui.text.Markup;
 import com.tgc.sky.ui.webview.RoundCornerWebView;
 
-import org.dkproject.dukunlangit.R;
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 
 
 public class Starboard extends BasePanel implements View.OnLayoutChangeListener, GameActivity.OnKeyboardListener {
@@ -87,7 +85,7 @@ public class Starboard extends BasePanel implements View.OnLayoutChangeListener,
         panelButton.setLayoutParams(new ConstraintLayout.LayoutParams(-2, -2));
         panelButton.setVisibility(View.VISIBLE);
         panelButton.setEnabled(true);
-        ScaleDrawable scaleDrawable = new ScaleDrawable(LangitApp.getGameResources().getDrawable(LangitApp.getGameResources().getIdentifier("systemui_closebutton", "drawable", LangitApp.getGamePackageName()), null), 17, 0.7f, 0.7f);
+        ScaleDrawable scaleDrawable = new ScaleDrawable(LangitApplication.getGameResources().getDrawable(LangitApplication.getGameResources().getIdentifier("systemui_closebutton", "drawable", LangitApplication.getGamePackageName()), null), 17, 0.7f, 0.7f);
         scaleDrawable.setLevel(100);
         panelButton.setBackground(scaleDrawable);
         final FrameLayout createLoadingScreen = createLoadingScreen();

@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Insets;
 import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -33,7 +32,6 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -51,12 +49,11 @@ import org.fmod.FMOD;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.tgc.sky.BuildConfig;
 import org.dkproject.dukunlangit.DialogJNI;
 import org.dkproject.dukunlangit.FileSelector;
 import org.dkproject.dukunlangit.ImGUI;
 import org.dkproject.dukunlangit.R;
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 import org.dkproject.dukunlangit.ImGUITextInput;
 import org.dkproject.dukunlangit.LoadVideoView;
 import kotlin.KotlinVersion;
@@ -912,23 +909,23 @@ public class GameActivity extends TGCNativeActivity {
     }
 
     public float getDisplayXdpi() {
-        return LangitApp.getGameResources().getDisplayMetrics().xdpi;
+        return LangitApplication.getGameResources().getDisplayMetrics().xdpi;
     }
 
     public float getDisplayYdpi() {
-        return LangitApp.getGameResources().getDisplayMetrics().ydpi;
+        return LangitApplication.getGameResources().getDisplayMetrics().ydpi;
     }
 
     public float getDisplayDensity() {
-        return LangitApp.getGameResources().getDisplayMetrics().density;
+        return LangitApplication.getGameResources().getDisplayMetrics().density;
     }
 
     public boolean isScreenHdr() {
-        return LangitApp.getGameResources().getConfiguration().isScreenHdr();
+        return LangitApplication.getGameResources().getConfiguration().isScreenHdr();
     }
 
     public boolean isScreenWideColorGamut() {
-        return LangitApp.getGameResources().getConfiguration().isScreenWideColorGamut();
+        return LangitApplication.getGameResources().getConfiguration().isScreenWideColorGamut();
     }
 
     public float getDesiredMinLum() {

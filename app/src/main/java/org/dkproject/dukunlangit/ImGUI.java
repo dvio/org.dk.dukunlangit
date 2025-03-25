@@ -63,29 +63,36 @@ public class ImGUI implements SurfaceHolder.Callback{
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int format, int width, int height) {
+        thread.pushRunnable(() -> resurface(surfaceHolder.getSurface()));
     }
+
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
-//        shutdown();
+        if (thread.hasInitialized) {
+            shutdown();
+            thread.hasInitialized = false;
+        }
     }
+
     static class ImGUIThread extends Thread {
         LinkedBlockingQueue<Runnable> runnables = new LinkedBlockingQueue<>();
         volatile boolean hasInitialized = false;
         public void pushRunnable(Runnable runnable) {
             runnables.add(runnable);
         }
+
         @Override
         public void run() {
             try {
-                while (true) {
+                while (!isInterrupted()) {  // Properly handle thread termination
                     runnables.take().run();
                 }
-            }catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt(); // Restore interrupted status
             }
         }
+
     }
 }

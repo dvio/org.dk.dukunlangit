@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".LangitApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -21,7 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LauncherActivity" />
+        <activity
+            android:name="com.tgc.sky.GameActivity"
+            android:colorMode="wideColorGamut"
+            android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|orientation|screenLayout|uiMode|screenSize|smallestScreenSize|fontScale"
+            android:keepScreenOn="true"
+            android:launchMode="singleTask"
+            android:resizeableActivity="false"
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/SkyFullscreenTheme" />
+
+        <activity android:name="com.tgc.sky.TGCNativeActivity" />
+        <activity
+            android:name=".LauncherActivity"
+            android:exported="false">
+        </activity>
     </application>
     <queries>
         <package android:name="com.tgc.sky.android" />

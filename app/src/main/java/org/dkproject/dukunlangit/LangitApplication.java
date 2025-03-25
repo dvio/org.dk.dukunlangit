@@ -1,14 +1,11 @@
 package org.dkproject.dukunlangit;
 
 import android.app.Application;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.res.Resources;
 import android.content.Context;
-import android.os.Build;
 
-public class LangitApp extends Application {
-    private static LangitApp langitApplication;
+public class LangitApplication extends Application {
+    private static LangitApplication langitApplication;
     private static  Context langitContext;
 
     private static String gamePkg;

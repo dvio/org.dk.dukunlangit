@@ -1,13 +1,10 @@
 package com.tgc.sky.ui.text;
 
-import android.annotation.SuppressLint;
-
-import androidx.constraintlayout.core.motion.utils.TypedValues;
 import androidx.core.app.FrameMetricsAggregator;
 import com.tgc.sky.GameActivity;
 import java.util.ArrayList;
 
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 
 
 public class LocalizationManager {
@@ -48,15 +45,15 @@ public class LocalizationManager {
 
     public String LocalizeString(String r10) {
         if(r10 == null) return null;
-        int id = LangitApp.getGameResources().getIdentifier(r10, "string", LangitApp.getGamePackageName());
+        int id = LangitApplication.getGameResources().getIdentifier(r10, "string", LangitApplication.getGamePackageName());
         if(id != 0) {
-            return LangitApp.getGameResources().getString(id);
+            return LangitApplication.getGameResources().getString(id);
         }
         return r10;
     }
 
     public boolean HasLocalizedString(String str) {
-        return str != null && LangitApp.getGameResources().getIdentifier(str, "string", LangitApp.getGamePackageName()) != 0;
+        return str != null && LangitApplication.getGameResources().getIdentifier(str, "string", LangitApplication.getGamePackageName()) != 0;
     }
 
     public LocalizedStringArgs GetLocalizedStringArgs(int i) {

@@ -13,6 +13,7 @@ media3Common = "1.6.0-rc02"
 media3Datasource = "1.6.0-rc02"
 media3Exoplayer = "1.6.0-rc02"
 media3ExoplayerHls = "1.6.0-rc02"
+jelf = "0.9.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -28,6 +29,7 @@ androidx-media3-common = { group = "androidx.media3", name = "media3-common", ve
 androidx-media3-datasource = { group = "androidx.media3", name = "media3-datasource", version.ref = "media3Datasource" }
 androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
 androidx-media3-exoplayer-hls = { group = "androidx.media3", name = "media3-exoplayer-hls", version.ref = "media3ExoplayerHls" }
+jelf = { group = "net.fornwall", name = "jelf", version.ref = "jelf" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

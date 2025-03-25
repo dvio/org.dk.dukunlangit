@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import java.io.File;
 
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 
 /* loaded from: classes2.dex */
 public abstract class TGCNativeActivity extends Activity implements SurfaceHolder.Callback2, ViewTreeObserver.OnGlobalLayoutListener {
@@ -58,7 +58,7 @@ public abstract class TGCNativeActivity extends Activity implements SurfaceHolde
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         findViewById(android.R.id.content).getRootView().getViewTreeObserver().addOnGlobalLayoutListener(this);
-        this.m_handle = onCreateNative(getAbsolutePath(getFilesDir()), getAbsolutePath(getObbDir()), getAbsolutePath(getExternalFilesDir(null)), Build.VERSION.SDK_INT, LangitApp.getGameResources().getAssets(), bundle != null ? bundle.getByteArray(KEY_NATIVE_SAVED_STATE) : null);
+        this.m_handle = onCreateNative(getAbsolutePath(getFilesDir()), getAbsolutePath(getObbDir()), getAbsolutePath(getExternalFilesDir(null)), Build.VERSION.SDK_INT, LangitApplication.getGameResources().getAssets(), bundle != null ? bundle.getByteArray(KEY_NATIVE_SAVED_STATE) : null);
     }
 
     @Override

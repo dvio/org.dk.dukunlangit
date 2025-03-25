@@ -36,7 +36,6 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import androidx.core.content.FileProvider;
-import androidx.core.content.PackageManagerCompat;
 import androidx.core.internal.view.SupportMenu;
 
 import com.tgc.sky.ui.QRCameraHandler;
@@ -69,7 +68,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.TimeZone;
 
-import org.dkproject.dukunlangit.LangitApp;
+import org.dkproject.dukunlangit.LangitApplication;
 
 public class SystemUI_android {
     public static final int kInvalidDialogId = -1;
@@ -207,7 +206,7 @@ public class SystemUI_android {
 
     void LockCurrentOrientation() {
         this.m_isOrientationLocked = true;
-        if (LangitApp.getGameResources().getConfiguration().orientation == 2) {
+        if (LangitApplication.getGameResources().getConfiguration().orientation == 2) {
             this.m_activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         } else {
             this.m_activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);

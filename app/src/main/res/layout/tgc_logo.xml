@@ -13,14 +13,21 @@
         android:layout_height="match_parent"/>
 
 
-
     <org.dkproject.dukunlangit.LoadVideoView
         android:id="@+id/vidLogo"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_gravity="center"
         android:src="@raw/vid_logo"
         android:visibility="visible"/>
+
+<!--    <org.dkproject.dukunlangit.LoadVideoView-->
+<!--        android:id="@+id/vidLogo"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+
+<!--        android:src="@raw/vid_logo"-->
+<!--        android:visibility="visible"/>-->
 
     <org.dkproject.dukunlangit.ImGUITextInput
         android:id="@+id/imguiInput"

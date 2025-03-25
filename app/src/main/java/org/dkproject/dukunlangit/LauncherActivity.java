@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,7 +15,6 @@ import com.tgc.sky.GameActivity;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 public class LauncherActivity extends Activity {
     private SharedPreferences sharedPreferences;
@@ -58,29 +56,40 @@ public class LauncherActivity extends Activity {
             Resources gameResources = null;
             try {
                 Context gameContext = getApplicationContext().createPackageContext(
-                        "com.game.package",
+                        ACTIVE_SKY_PACKAGE,
                         Context.CONTEXT_INCLUDE_CODE | Context.CONTEXT_IGNORE_SECURITY);
                 gameResources = gameContext.getResources();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
-            LangitApp.init(pkgInfo.packageName, langitContext, gameResources);
+            LangitApplication.init(pkgInfo.packageName, langitContext, gameResources);
             String gameVersion = pkgInfo.versionName;
             BuildConfig.SKY_VERSION = gameVersion.substring(0, gameVersion.indexOf(' ')).trim();
             BuildConfig.VERSION_CODE = pkgInfo.versionCode;
-            String nativeLibraryDir = pkgInfo.applicationInfo.nativeLibraryDir;
+//            String nativeLibraryDir = pkgInfo.applicationInfo.nativeLibraryDir;
 //            File modsDir = new File(getFilesDir(), "mods");
             File configDir = new File(getFilesDir(), "config");
             if (!configDir.isDirectory() && !configDir.mkdirs()) throw new IOException("Failed to create config directory");
 
-            String libBootloaderPath = nativeLibraryDir + ":/system/lib64/libBootloader.so";
-            int result = ELFLoader.loadSharedLibrary(libBootloaderPath);
-            if (result == 0) {
+
+            String nativeLibraryDir = pkgInfo.applicationInfo.nativeLibraryDir;
+            Log.d("LauncherActivity", "Loading Bootloader\n" + nativeLibraryDir);
+
+            boolean success = ELFLoader.loadLibrary(nativeLibraryDir, "libBootloader.so");
+
+            if (success) {
+                Log.d("LauncherActivity", "Bootloader loaded successfully");
                 System.out.println("Library loaded successfully");
             } else {
+                Log.d("LauncherActivity", "Failed to load Bootloader");
                 System.err.println("Failed to load library");
             }
+
+            Log.d("LauncherActivity", "Loading Native library");
+
             System.loadLibrary("DukunLangit");
+
+
 
             if (ACTIVE_SKY_PACKAGE.equals("com.tgc.sky.android.test.gold")) {
 //                ACTIVE_SKY_PACKAGE = "com.tgc.sky.android.test.";
@@ -89,8 +98,11 @@ public class LauncherActivity extends Activity {
                 BuildConfig.SKY_STAGE_NAME = "Beta";
             }
 
+            Log.d("LauncherActivity", "Initializing Native variables");
             initVars(gameVersion, gameType, BuildConfig.SKY_SERVER_HOSTNAME, configDir.getAbsolutePath(), langitContext, gameResources);
             BuildConfig.APPLICATION_ID = ACTIVE_SKY_PACKAGE;
+
+            Log.d("LauncherActivity", "Starting Game");
             startActivity(new Intent(this, GameActivity.class));
 
         } catch (PackageManager.NameNotFoundException e) {
