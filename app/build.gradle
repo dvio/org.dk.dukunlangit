@@ -46,6 +46,13 @@ dependencies {
     implementation libs.appcompat
     implementation libs.material
     implementation libs.constraintlayout
+    implementation libs.androidx.constraintlayout
+    implementation libs.core
+    implementation libs.androidx.constraintlayout.core
+    implementation libs.androidx.media3.common
+    implementation libs.androidx.media3.datasource
+    implementation libs.androidx.media3.exoplayer
+    implementation libs.androidx.media3.exoplayer.hls
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core

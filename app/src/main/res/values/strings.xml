@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Dukun Langit</string>
+    <string name="app_info"><![CDATA[
+<strong>Dukun Langit</strong>
+
+    ]]></string>
 </resources>

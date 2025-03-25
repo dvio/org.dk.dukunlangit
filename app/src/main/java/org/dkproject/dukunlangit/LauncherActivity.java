@@ -12,7 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.tgc.sky.BuildConfig;
-//import com.tgc.sky.GameActivity;
+import com.tgc.sky.GameActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,16 +33,23 @@ public class LauncherActivity extends Activity {
         if (!ACTIVE_SKY_PACKAGE.isEmpty()) {
             // Placeholder for library loading logic
             Log.d("LauncherActivity", "Loading libraries for: " + ACTIVE_SKY_PACKAGE);
-            loadLibraries(ACTIVE_SKY_PACKAGE);
+
+//            loadLibraries(ACTIVE_SKY_PACKAGE);
         } else {
             Log.e("LauncherActivity", "No package selected.");
         }
 
-        // Close the activity once done
-        loadGame();
+        int gameType = 0;
+        if (ACTIVE_SKY_PACKAGE.equals("com.tgc.sky.android.test.gold")) {
+            gameType = 1;
+        } else if (ACTIVE_SKY_PACKAGE.equals("com.tgc.sky.android.huawei")) {
+            gameType = 2;
+        }
+
+        loadGame(gameType);
     }
 
-    private void loadGame() {
+    private void loadGame(int gameType) {
         PackageManager pm = getPackageManager();
         try {
             PackageInfo pkgInfo;
@@ -74,44 +81,18 @@ public class LauncherActivity extends Activity {
                 System.err.println("Failed to load library");
             }
             System.loadLibrary("DukunLangit");
-//            System.loadLibrary("Langit");
 
-//            setDeviceInfoNative(
-//                    deviceInfo.xdpi,
-//                    deviceInfo.ydpi,
-//                    deviceInfo.density,
-//                    Optional.ofNullable(deviceInfo.deviceName).orElse(""),
-//                    Optional.ofNullable(deviceInfo.deviceManufacturer).orElse(""),
-//                    Optional.ofNullable(deviceInfo.deviceModel).orElse("")
-//            );
+            if (ACTIVE_SKY_PACKAGE.equals("com.tgc.sky.android.test.gold")) {
+//                ACTIVE_SKY_PACKAGE = "com.tgc.sky.android.test.";
+                BuildConfig.SKY_SERVER_HOSTNAME = "beta.radiance.thatgamecompany.com";
+                BuildConfig.SKY_BRANCH_NAME = "Test";
+                BuildConfig.SKY_STAGE_NAME = "Beta";
+            }
 
-//            IconLoader.findIcons();
-//            BuildConfig.VERSION_CODE = sharedPreferences.getBoolean("skip_updates", false) ? 0x99999 : info.versionCode;
-//            Integer gameType = skyPackages.getOrDefault(SKY_PACKAGE_NAME, 0);
-//            MainActivity.settle(
-//                    info.versionCode,
-//                    gameType == null ? 0 : gameType,
-//                    BuildConfig.SKY_SERVER_HOSTNAME,
-//                    configDir.getAbsolutePath(),
-//                    SkyMod.skyRes.getAssets()
-//            );
-//
-//            if (SKY_PACKAGE_NAME.equals("com.tgc.sky.android.test.gold")) {
-//                SKY_PACKAGE_NAME = "com.tgc.sky.android.test.";
-//                BuildConfig.SKY_SERVER_HOSTNAME = "beta.radiance.thatgamecompany.com";
-//                BuildConfig.SKY_BRANCH_NAME = "Test";
-//                BuildConfig.SKY_STAGE_NAME = "Test";
-//            }
-//
-//            if(sharedPreferences.getBoolean("custom_server", false)){
-//
-//                BuildConfig.SKY_SERVER_HOSTNAME = sharedPreferences.getString("server_host", BuildConfig.SKY_SERVER_HOSTNAME);
-//                MainActivity.customServer(BuildConfig.SKY_SERVER_HOSTNAME);
-//            }
-//
-//            new ElfRefcountLoader(nativeLibraryDir + ":/system/lib64", modsDir).load();
-//            BuildConfig.APPLICATION_ID = SKY_PACKAGE_NAME;
-//            startActivity(new Intent(this, GameActivity.class));
+            initVars(gameVersion, gameType, BuildConfig.SKY_SERVER_HOSTNAME, configDir.getAbsolutePath(), langitContext, gameResources);
+            BuildConfig.APPLICATION_ID = ACTIVE_SKY_PACKAGE;
+            startActivity(new Intent(this, GameActivity.class));
+
         } catch (PackageManager.NameNotFoundException e) {
 //            alertDialog(getString(R.string.sky_not_installed));
         } catch (Throwable e) {
@@ -124,12 +105,13 @@ public class LauncherActivity extends Activity {
         Log.d("LauncherActivity", "Libraries for " + packageName + " would be loaded here.");
     }
 
-    public static native void initEssentials(
-            int gameVersion,
+    public static native void initVars(
+            String gameVersion,
             int gameType,
             String hostName,
             String configDir,
             Context context,
             Resources resources
     );
+    public static native void onKeyboardCompleteNative(String message);
 }

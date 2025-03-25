@@ -6,6 +6,13 @@ espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
 constraintlayout = "2.2.0"
+constraintlayoutVersion = "2.2.1"
+core = "3.5.3"
+constraintlayoutCore = "1.1.1"
+media3Common = "1.6.0-rc02"
+media3Datasource = "1.6.0-rc02"
+media3Exoplayer = "1.6.0-rc02"
+media3ExoplayerHls = "1.6.0-rc02"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -13,7 +20,14 @@ ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitV
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version = "2.2.1" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayoutVersion" }
+core = { group = "com.google.zxing", name = "core", version.ref = "core" }
+androidx-constraintlayout-core = { group = "androidx.constraintlayout", name = "constraintlayout-core", version.ref = "constraintlayoutCore" }
+androidx-media3-common = { group = "androidx.media3", name = "media3-common", version.ref = "media3Common" }
+androidx-media3-datasource = { group = "androidx.media3", name = "media3-datasource", version.ref = "media3Datasource" }
+androidx-media3-exoplayer = { group = "androidx.media3", name = "media3-exoplayer", version.ref = "media3Exoplayer" }
+androidx-media3-exoplayer-hls = { group = "androidx.media3", name = "media3-exoplayer-hls", version.ref = "media3ExoplayerHls" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

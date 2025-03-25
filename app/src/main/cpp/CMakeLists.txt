@@ -12,10 +12,17 @@ cmake_minimum_required(VERSION 3.22.1)
 project("DukunLangit")
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/DukunLangit)
+set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 
 file(GLOB_RECURSE DUKUNLANGIT_SRC "${SRC_DIR}/*.cpp" "${SRC_DIR}/*.h")
+file(GLOB_RECURSE DUKUNLANGIT_INCLUDE_DIRS LIST_DIRECTORIES true "${SRC_DIR}/*")
 
-include_directories(${SRC_DIR})
+file(GLOB_RECURSE EXT_INCLUDE_DIRS LIST_DIRECTORIES true "${INCLUDE_DIR}/*")
+
+include_directories(
+        ${DUKUNLANGIT_INCLUDE_DIRS}
+        ${EXT_INCLUDE_DIRS}
+)
 
 add_library(
         ${CMAKE_PROJECT_NAME}

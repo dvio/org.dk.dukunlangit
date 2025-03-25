@@ -5,13 +5,29 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.res.Resources;
 import android.content.Context;
+import android.os.Build;
 
 public class LangitApp extends Application {
     private static LangitApp langitApplication;
+    private static  Context langitContext;
+
     private static String gamePkg;
 
-    private static  Context langitContext;
+
     private static Resources gameRes;
+    private static Resources langitRes;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        langitApplication = this;
+    }
+
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        langitApplication = null;
+    }
 
     public static void init(String pkgName, Context context, Resources resources){
         gamePkg = pkgName;
@@ -24,6 +40,10 @@ public class LangitApp extends Application {
             throw new IllegalStateException("LangitContext is not initialized");
         }
         return langitContext;
+    }
+
+    public static Resources getLangitResources(){
+        return langitApplication.getResources();
     }
 
     public static Resources getGameResources(){
