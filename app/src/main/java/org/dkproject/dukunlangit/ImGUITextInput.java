@@ -104,8 +104,8 @@ public class ImGUITextInput extends androidx.appcompat.widget.AppCompatEditText 
 
     /** Send the enter key. */
     private void sendEnter(){
-        ImGUI.submitKeyEvent(KeyEvent.KEYCODE_ENTER, true);
-        ImGUI.submitKeyEvent(KeyEvent.KEYCODE_ENTER, false);
+        ImGui.submitKeyEvent(KeyEvent.KEYCODE_ENTER, true);
+        ImGui.submitKeyEvent(KeyEvent.KEYCODE_ENTER, false);
         clear();
     }
 
@@ -134,10 +134,10 @@ public class ImGUITextInput extends androidx.appcompat.widget.AppCompatEditText 
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(mIsDoingInternalChanges)return;
                 if (count != 0)
-                    ImGUI.submitUnicodeEvent(s.charAt(start + before));
+                    ImGui.submitUnicodeEvent(s.charAt(start + before));
                 else {
-                    ImGUI.submitKeyEvent(KeyEvent.KEYCODE_DEL, true);
-                    ImGUI.submitKeyEvent(KeyEvent.KEYCODE_DEL, false);
+                    ImGui.submitKeyEvent(KeyEvent.KEYCODE_DEL, true);
+                    ImGui.submitKeyEvent(KeyEvent.KEYCODE_DEL, false);
                 }
                 //Reset the keyboard state
                 clear();

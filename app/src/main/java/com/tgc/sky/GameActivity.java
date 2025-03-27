@@ -51,7 +51,7 @@ import org.json.JSONObject;
 
 import org.dkproject.dukunlangit.DialogJNI;
 import org.dkproject.dukunlangit.FileSelector;
-import org.dkproject.dukunlangit.ImGUI;
+import org.dkproject.dukunlangit.ImGui;
 import org.dkproject.dukunlangit.R;
 import org.dkproject.dukunlangit.LangitApplication;
 import org.dkproject.dukunlangit.ImGUITextInput;
@@ -73,7 +73,7 @@ public class GameActivity extends TGCNativeActivity {
     private MediaPlayer m_mediaPlayer;
     private int m_nativeHeight;
     private int m_nativeWidth;
-    private ImGUI imgui;
+    private ImGui imgui;
     private boolean imguiKeybaordShowing;
     private ImGUITextInput imguiInput;
     private boolean m_logoSoundReleased = false;
@@ -240,12 +240,12 @@ public class GameActivity extends TGCNativeActivity {
         this.m_relativeLayout = findViewById(R.id.sml_relLayout);
         ((SurfaceView)findViewById(R.id.surfaceView)).getHolder().addCallback(this);
         FileSelector.setActivity(this);
-        if(imgui == null) imgui = new ImGUI();
+        if(imgui == null) imgui = new ImGui();
         SurfaceView imguiView = findViewById(R.id.imguiView);
         imguiView.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         imguiView.getHolder().addCallback(imgui);
         imguiView.setZOrderOnTop(true);
-        ImGUI.setClipboardService((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE));
+        ImGui.setClipboardService((ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE));
         imguiInput = findViewById(R.id.imguiInput);
         FMOD.init(this);
         new SystemCommerce_android(this);
@@ -530,15 +530,15 @@ public class GameActivity extends TGCNativeActivity {
     public boolean onTouchEvent(MotionEvent motionEvent) {
         int actionMasked = motionEvent.getActionMasked();
         if (actionMasked == MotionEvent.ACTION_UP || actionMasked == MotionEvent.ACTION_DOWN  || actionMasked == MotionEvent.ACTION_MOVE) {
-            ImGUI.submitPositionEvent(motionEvent.getX(), motionEvent.getY());
+            ImGui.submitPositionEvent(motionEvent.getX(), motionEvent.getY());
             if (actionMasked == MotionEvent.ACTION_DOWN) {
-                ImGUI.submitButtonEvent(0, true);
+                ImGui.submitButtonEvent(0, true);
             }
             if (actionMasked == MotionEvent.ACTION_UP) {
-                ImGUI.submitButtonEvent(0, false);
+                ImGui.submitButtonEvent(0, false);
             }
 
-            boolean wantsKeyboard = ImGUI.wantsKeyboard();
+            boolean wantsKeyboard = ImGui.wantsKeyboard();
             if (wantsKeyboard && !imguiKeybaordShowing) {
                 imguiInput.setKeyboardState(true);
                 imguiKeybaordShowing = wantsKeyboard;
@@ -547,7 +547,7 @@ public class GameActivity extends TGCNativeActivity {
                 imguiInput.setKeyboardState(false);
                 imguiKeybaordShowing = wantsKeyboard;
             }
-            if (ImGUI.wantsMouse()) {
+            if (ImGui.wantsMouse()) {
                 return true;
             }
         }

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="?android:windowBackground">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardAndroid"
