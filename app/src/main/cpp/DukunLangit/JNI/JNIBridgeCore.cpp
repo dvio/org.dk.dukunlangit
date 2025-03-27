@@ -2,6 +2,7 @@
 #include <string>
 
 #include "GlobalVars.h"
+//#include "Main.h"
 
 extern "C"
 JNIEXPORT void JNICALL

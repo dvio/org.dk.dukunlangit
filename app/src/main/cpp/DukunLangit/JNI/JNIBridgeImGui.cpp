@@ -12,8 +12,8 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 #include <unistd.h>
-//#include "Canvas/Canvas.h"
-#include "ui.h"
+#include "UI.h"
+#include "Main.h"
 
 #include "GlobalDefines.h"
 
@@ -188,14 +188,11 @@ PRIVATE_METHOD void renderloop()
         newframe();
         ImGui::NewFrame();
 
-        InitImages();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0,0,0,0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(0,0,0,0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0,0,0,0));
 
-        UI::ShowMainMenu();
 
-        ImGui::PopStyleColor(3);
+        UI::DrawUI();
+
+
 
         ImGui::Render();
         glViewport(0, 0, (int)io.DisplaySize.x, (int)io.DisplaySize.y);
@@ -311,6 +308,9 @@ Java_org_dkproject_dukunlangit_ImGui_init(JNIEnv *env, jclass clazz, jobject sur
     ImGui::StyleColorsDark();
     ImGui_ImplOpenGL3_Init("#version 300 es");
     ImGui::GetStyle().ScaleAllSizes(scale);
+
+    Core::InitMain();
+
     renderloop();
 }
 

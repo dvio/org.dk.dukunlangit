@@ -1,16 +1,8 @@
-#ifndef USERLIB_MENU_H
-#define USERLIB_MENU_H
-
-#endif //USERLIB_MENU_H
+#pragma once
 
 #include "imgui.h"
 #include <string>
-
-struct MenuButton {
-    ImTextureID texture;
-    std::string label;
-    bool isSelected;
-};
+#include <unordered_map>
 
 extern ImTextureID ImageLogo;
 extern ImTextureID MainMenuBtnBG;
@@ -18,7 +10,6 @@ extern ImTextureID CBTrue;
 extern ImTextureID CBFalse;
 
 //Icons
-
 
 extern ImTextureID icAutoCR;
 extern ImTextureID icEdenRun;
@@ -44,12 +35,13 @@ extern ImTextureID icBlink;
 
 extern ImTextureID icSpirits;
 extern ImTextureID icSpiritShop;
+extern ImTextureID icAbout;
 
 extern void InitImages();
 
-namespace UI {
-    extern std::vector<MenuButton> MainMenu;
-    extern std::vector<std::vector<MenuButton>> SubMenu;
-    extern void ShowFloatingMenuButton();
-    extern void ShowMainMenu();
+namespace Graphic {
+    extern std::unordered_map<std::string, ImTextureID> MenuTextures;
+
+    extern ImTextureID GetMenuIcon(std::string iconName);
+
 }

@@ -22,8 +22,10 @@ include_directories(
         ${INCLUDE_DIR}/ImGui/backends
         ${INCLUDE_DIR}/StbImage
         ${INCLUDE_DIR}/KittyMemory
+        ${INCLUDE_DIR}/nlohmann
         ${SRC_DIR}/Global
         ${SRC_DIR}/Core
+        ${SRC_DIR}/Core/Utils
         ${SRC_DIR}/UI
 )
 
@@ -48,6 +50,7 @@ file(GLOB CPP_INCLUDES
         ${CMAKE_CURRENT_SOURCE_DIR}/Includes/ImGui/backends/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Includes/KittyMemory/*.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Includes/StbImage/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Includes/nlohmann/*.cpp
 
         ${SRC_DIR}/Core/*.cpp
         ${SRC_DIR}/Core/**/*.cpp

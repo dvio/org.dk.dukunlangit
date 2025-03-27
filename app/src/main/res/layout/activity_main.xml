@@ -8,6 +8,7 @@
     android:padding="16dp"
     android:background="?android:windowBackground">
 
+    <!-- Android Version Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardAndroid"
         android:layout_width="match_parent"
@@ -19,15 +20,31 @@
         android:focusable="true"
         android:background="?attr/selectableItemBackground">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Android Version"
-            android:textSize="18sp"
-            android:textColor="#000"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageAndroid"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/green"/>
+
+            <TextView
+                android:id="@+id/textAndroid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/imageAndroid"
+                android:gravity="center"
+                android:text="Android Version"
+                android:textSize="18sp"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
+    <!-- Beta Version Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardBeta"
         android:layout_width="match_parent"
@@ -39,15 +56,31 @@
         android:focusable="true"
         android:background="?attr/selectableItemBackground">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Beta Version"
-            android:textSize="18sp"
-            android:textColor="#000"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageBeta"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/purple_500"/>
+
+            <TextView
+                android:id="@+id/textBeta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/imageBeta"
+                android:gravity="center"
+                android:text="Beta Version"
+                android:textSize="18sp"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
+    <!-- Huawei Version Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardHuawei"
         android:layout_width="match_parent"
@@ -58,13 +91,28 @@
         android:focusable="true"
         android:background="?attr/selectableItemBackground">
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Huawei Version"
-            android:textSize="18sp"
-            android:textColor="#000"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageHuawei"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/teal_200"/>
+
+            <TextView
+                android:id="@+id/textHuawei"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/imageHuawei"
+                android:gravity="center"
+                android:text="Huawei Version"
+                android:textSize="18sp"
+                android:textColor="#000"/>
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>
