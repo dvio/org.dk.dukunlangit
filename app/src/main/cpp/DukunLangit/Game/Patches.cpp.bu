@@ -1,0 +1,52 @@
+#include <unordered_map>
+//#include "MemoryPatch.hpp"
+//#include "MemoryTools.h"
+#include "Patches.h"
+
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
+
+namespace Patches {
+    std::unordered_map<std::string, std::vector<Patch>> Patches;
+
+    std::vector<uint8_t> toBytes(const std::string& opcode) {
+        return std::vector<uint8_t>(opcode.begin(), opcode.end());
+    }
+
+    template<typename T>
+    std::vector<uint8_t> toBytes(const T& value) {
+        std::vector<uint8_t> bytes(sizeof(T));
+        std::memcpy(bytes.data(), &value, sizeof(T));
+        return bytes;
+    }
+
+    void Init(int gameType){
+        std::string jsonStr = GetPatchesJson(gameType);
+        json patchData = json::parse(jsonStr);
+
+        for (auto& [patchName, patchList] : patchData.items()) {
+            std::vector<Patch> patches;
+
+            for (const auto& item : patchList) {
+                Patch patch;
+                patch.address = std::stoull(item["address"].get<std::string>(), nullptr, 16);
+                patch.scanParams.pattern = item["scanParams"]["pattern"];
+                patch.scanParams.scanOffset = item["scanParams"]["scanOffset"];
+                patch.scanParams.usePointerCalc = item["scanParams"]["usePointerCalc"];
+                patch.scanParams.pointerOffset = item["scanParams"]["pointerOffset"];
+
+                patch.originalBytes = item["originalBytes"].get<std::vector<uint8_t>>();
+                patch.patchedBytes = item["patchedBytes"].get<std::vector<uint8_t>>();
+                patch.isApplied = item["isApplied"];
+                patch.isValid = item["isValid"];
+                patch.scanOnInvalid = item["scanOnInvalid"];
+                patch.addressOffset = item["addressOffset"];
+
+                patches.push_back(patch);
+            }
+
+            Patches[patchName] = patches;
+        }
+    }
+}

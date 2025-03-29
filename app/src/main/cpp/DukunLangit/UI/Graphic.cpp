@@ -21,6 +21,7 @@ ImTextureID icEssentials;
 ImTextureID icFakery;
 ImTextureID icMapHack;
 ImTextureID icWitchcraft;
+ImTextureID icGameSpeed;
 
 ImTextureID icAmbience;
 ImTextureID icAvatar;
@@ -53,6 +54,7 @@ void InitImages() {
     INCLUDE_IMG(icFakery_png);
     INCLUDE_IMG(icMapHack_png);
     INCLUDE_IMG(icWitchcraft_png);
+    INCLUDE_IMG(icGameSpeed_png);
 
     INCLUDE_IMG(icAmbience_png);
     INCLUDE_IMG(icAvatar_png);
@@ -71,6 +73,8 @@ void InitImages() {
     icWitchcraft = getTextureID(&icWitchcraft_png);
     icMapHack = getTextureID(&icMapHack_png);
     icFakery = getTextureID(&icFakery_png);
+    icGameSpeed = getTextureID(&icGameSpeed_png);
+
     icExtra = getTextureID(&icExtra_png);
     icMiscellaneous = getTextureID(&icMiscellaneous_png);
     icAvatar = getTextureID(&icAvatar_png);
@@ -98,6 +102,7 @@ void InitImages() {
             {"icFakery", icFakery},
             {"icExtra", icExtra},
             {"icMiscellaneous", icMiscellaneous},
+            {"icGameSpeed", icGameSpeed},
             {"icAvatar", icAvatar},
             {"icAmbience", icAmbience},
             {"icCamera", icCamera},
@@ -112,7 +117,7 @@ void InitImages() {
             {"icSettings", icSettings},
             {"icSettings2", icSettings2},
             {"icAbout", icAbout},
-            {"icEdenRun", icEdenRun}
+            {"icEdenRun", icEdenRun},
     };
 }
 
@@ -125,5 +130,21 @@ namespace Graphic {
             return MenuTextures[iconName];
         }
         return (ImTextureID)nullptr;
+    }
+
+    float NormalizeScale(float value) {
+        return value * GlobalVars::GlobalScale;
+    }
+
+    int NormalizeScale(int value) {
+        return static_cast<int>(value * GlobalVars::GlobalScale);
+    }
+
+    ImVec2 NormalizeScale(const ImVec2& value) {
+        return ImVec2(value.x * GlobalVars::GlobalScale, value.y * GlobalVars::GlobalScale);
+    }
+
+    ImVec4 NormalizeScale(const ImVec4& value) {
+        return ImVec4(value.x * GlobalVars::GlobalScale, value.y * GlobalVars::GlobalScale, value.z * GlobalVars::GlobalScale, value.w * GlobalVars::GlobalScale);
     }
 }

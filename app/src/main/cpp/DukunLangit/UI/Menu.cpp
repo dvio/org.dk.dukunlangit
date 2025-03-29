@@ -59,6 +59,15 @@ namespace Menu {
                         "games": [0, 1, 2],
                         "icon": "icFakery",
                         "submenus": []
+                    },
+                    {
+                        "id": "Game Speed",
+                        "enabled": true,
+                        "hasUI": true,
+                        "tiers": [9, 0, 1, 2],
+                        "games": [0, 1, 2],
+                        "icon": "icGameSpeed",
+                        "submenus": []
                     }
                 ]
             },
@@ -142,7 +151,7 @@ namespace Menu {
                 "hasUI": false,
                 "tiers": [9, 0, 1, 2],
                 "games": [0, 1, 2],
-                "icon": "icFarming",
+                "icon": "icEdenRun",
                 "submenus": [
                     {
                         "id": "Auto Farm",

@@ -5,16 +5,16 @@
 
 namespace Styles {
     struct StyleConfig {
-        std::vector<std::pair<ImGuiCol, ImVec4>> colors;
-        std::vector<std::pair<ImGuiStyleVar, float>> vars;
+        std::map<ImGuiCol, ImVec4> colors;  // All defined colors for the style
+        std::map<ImGuiStyleVar, float> sizes;  // All defined sizes for the style
+        std::vector<ImGuiCol> colorPreset; // Determines which colors to apply
+        std::vector<ImGuiStyleVar> sizePreset; // Determines which sizes to apply
     };
 
-    static std::map<std::string, StyleConfig> Styles;
-    static std::string ActiveStyle = "";
+    extern std::map<std::string, StyleConfig> Styles;
 
-    extern void ApplyStyle(const std::string& name);
-    extern void ResetStyle();
-    extern void InitStyles();
-
-
+    void ApplyStyle();
+    void ResetStyle();
+    void InitStyles();
 }
+

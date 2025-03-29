@@ -6,6 +6,7 @@
 
 #include "Menu.h"
 #include "Graphic.h"
+#include <Styles.h>
 
 namespace UI {
     int MainMenuSelected = -1;
@@ -21,6 +22,10 @@ namespace UI {
     };
 
     MainButtonPos mainButtonPosition = Right; // Change this to Left or Right as needed
+
+    void InitPages(){
+        TestPage::InitPages();
+    }
 
     void DrawButtonArc(ImDrawList* draw_list, ImVec2 center, float startAngle, float endAngle,
                        float innerRadius, float outerRadius, float gapSize, ImU32 color, ImU32 outlineColor, bool active) {
@@ -221,18 +226,12 @@ namespace UI {
 
                         ImGui::SetCursorScreenPos(
                                 ImVec2(subPos.x - buttonSize.x / 2, subPos.y - buttonSize.y / 2));
-//                    ImGui::PushID(("SubMenu" + std::to_string(j)).c_str());
+
                         if (ImGui::ImageButton(("SubMenu" + std::to_string(j)).c_str(),
                                                Graphic::GetMenuIcon(menuItem.submenus[j].icon),
                                                buttonSize)) {
                             SubMenuSelected = (SubMenuSelected == MainMenuSelected) ? -1 : j;
-//                            if (SubMenuSelected == 0) {
-//                                mainButtonPosition = Right;
-//                            } else if (SubMenuSelected == 1) {
-//                                mainButtonPosition = Bottom;
-//                            } else if (SubMenuSelected == 2) {
-//                                mainButtonPosition = Left;
-//                            }
+
                             if (menuItem.submenus[j].hasUI) {
                                 if (Menu::ActiveMenu == menuItem.submenus[j].id){
                                     Menu::ActiveMenu = "";
@@ -274,9 +273,17 @@ namespace UI {
 
     void DrawPage(std::string& pageID){
         std::string caption = pageID + "###MainPage";
-        ImGui::Begin(caption.c_str());
-        ImGui::Text("Here all %s things will be shown", pageID.c_str());
+
+        ImGui::SetNextWindowSize(ImVec2(600, 400), ImGuiCond_FirstUseEver);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10, 10));
+
+        if (ImGui::Begin("##CustomWindow", nullptr,
+                         ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings))
+        {
+            TestPage::DrawContent();
+        }
         ImGui::End();
+        ImGui::PopStyleVar();
     }
 
     void DrawUI(){
@@ -291,9 +298,14 @@ namespace UI {
 
 
         if (!Menu::ActiveMenu.empty()) {
-            DrawPage(Menu::ActiveMenu);
-        }
+            Styles::ApplyStyle();
+//            DrawPage(Menu::ActiveMenu);
+            DrawMainPage();
+            Styles::ResetStyle();
 
+        }
     }
+
+
 
 }

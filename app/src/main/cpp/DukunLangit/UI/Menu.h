@@ -21,6 +21,6 @@ namespace Menu {
     extern std::vector<MenuItem> Menus;  // Stores the parsed menus
     extern std::unordered_map<std::string, MenuItem*> MenuLookup;
 
-    extern void InitMenus(int userTier, int userGame);  // Loads the menus from JSON
+    void InitMenus(int userTier, int userGame);  // Loads the menus from JSON
 //    void RenderMenus();  // Calls ImGui to display the menu
 }

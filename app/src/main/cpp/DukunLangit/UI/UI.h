@@ -16,10 +16,23 @@ namespace UI {
 //    extern void ShowFloatingMenuButton();
 //    extern void DrawMainMenu();
 
-    extern void DrawUI();
+    void InitPages();
+
+    void DrawUI();
 
 
-    extern void DrawMainPage();
-    extern void DrawTestPage();
+    void DrawMainPage();
+    void DrawTestPage();
 
+    //Style
+    void DrawStyleSelector(std::string label);
+
+    bool BeginScrollingChild(const char* str_id, const ImVec2& size, ImGuiChildFlags childFlags = 0, ImGuiWindowFlags flags = 0);
+    void EndScrollingChild();
+
+}
+
+namespace TestPage {
+    void InitPages();
+    void DrawContent();
 }

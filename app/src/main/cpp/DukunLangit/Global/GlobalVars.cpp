@@ -7,4 +7,6 @@ namespace GlobalVars {
     int GameType = 0;
     std::string ServerHostname = "live.radiance.thatgamecompany.com";
     std::string ConfigDir = "";
+    float GlobalScale = 1.0f;
+    std::string ActiveStyle = "";
 } // GlobalVars

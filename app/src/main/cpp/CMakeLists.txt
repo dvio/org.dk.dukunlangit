@@ -15,9 +15,11 @@ set(SRC_DIR ${CMAKE_SOURCE_DIR}/DukunLangit)
 set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/Includes)
 
 file(GLOB_RECURSE DUKUNLANGIT_SRC "${SRC_DIR}/*.cpp" "${SRC_DIR}/*.h")
+set(OPENSSL_DISTRO_PATH ${INCLUDE_DIR}/openssl)
 
 include_directories(
 #        ${INCLUDE_DIR}
+        ${INCLUDE_DIR}
         ${INCLUDE_DIR}/ImGui
         ${INCLUDE_DIR}/ImGui/backends
         ${INCLUDE_DIR}/StbImage
@@ -25,8 +27,10 @@ include_directories(
         ${INCLUDE_DIR}/nlohmann
         ${SRC_DIR}/Global
         ${SRC_DIR}/Core
-        ${SRC_DIR}/Core/Utils
+        ${SRC_DIR}/Utils
         ${SRC_DIR}/UI
+        ${OPENSSL_DISTRO_PATH}
+        ${OPENSSL_DISTRO_PATH}/include/
 )
 
 file(GLOB RESOURCE_FILE_LIST RELATIVE ${CMAKE_SOURCE_DIR}/resources/ ${CMAKE_SOURCE_DIR}/resources/* )
@@ -81,9 +85,16 @@ if (NOT kNO_KEYSTONE)
 endif()
 
 find_library(log-lib log)
-# Specifies libraries CMake should link to your target library. You
-# can link libraries from various origins, such as libraries defined in this
-# build script, prebuilt third-party libraries, or Android system libraries.
+
+# OpenSSL
+
+add_library(crypto STATIC IMPORTED )
+set_target_properties(crypto
+        PROPERTIES IMPORTED_LOCATION ${OPENSSL_DISTRO_PATH}/lib/libcrypto.a)
+add_library(ssl STATIC IMPORTED )
+set_target_properties(ssl
+        PROPERTIES IMPORTED_LOCATION ${OPENSSL_DISTRO_PATH}/lib/libssl.a)
+
 target_link_libraries(
         ${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
@@ -92,4 +103,6 @@ target_link_libraries(
         dl
         GLESv3
         EGL
+        crypto
+        ssl
 )

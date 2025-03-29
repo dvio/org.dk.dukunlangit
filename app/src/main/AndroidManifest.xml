@@ -21,6 +21,7 @@
 
     <application
         android:name=".LangitApplication"
+        android:isGame="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -30,6 +31,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DukunLangit"
         tools:targetApi="31">
+
+        <!-- Game Mode (Android 12+) -->
+        <meta-data android:name="android.app.game_mode" android:value="performance" />
+
+        <!-- OpenGL ES support (optional) -->
+        <meta-data android:name="android.hardware.opengles.aep" android:value="true" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

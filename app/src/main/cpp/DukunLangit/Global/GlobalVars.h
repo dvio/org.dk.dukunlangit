@@ -10,4 +10,7 @@ namespace GlobalVars {
     extern int GameType;
     extern std::string ServerHostname;
     extern std::string ConfigDir;
+
+    extern float GlobalScale;
+    extern std::string ActiveStyle;
 } // GlobalVars

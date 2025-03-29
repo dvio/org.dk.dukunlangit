@@ -22,7 +22,9 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -54,6 +56,7 @@ dependencies {
     implementation libs.androidx.media3.exoplayer
     implementation libs.androidx.media3.exoplayer.hls
     implementation libs.jelf
+    implementation libs.androidx.games.activity
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
